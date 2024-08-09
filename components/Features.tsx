@@ -20,11 +20,11 @@ const Features = () => {
         </div>
         <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
           <img
-            src="/vercel.svg"
-            width="550"
-            height="310"
+            src="/1.jpg"
+            width="590"
+            height="350"
             alt="Image"
-            className="mx-auto aspect-video overflow-hidden rounded-xl object-fit object-center sm:w-full lg:order-last"
+            className="mx-auto aspect-video overflow-hidden rounded-xl object-contain object-center sm:w-full lg:order-last"
           />
           <div className="flex flex-col justify-center space-y-4">
             <ul className="grid gap-6">
