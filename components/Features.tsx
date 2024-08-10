@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const Features = () => {
@@ -19,13 +20,14 @@ const Features = () => {
           </div>
         </div>
         <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-          <img
+          <Image
             src="/1.jpg"
             width="590"
             height="350"
             alt="Image"
             className="mx-auto aspect-video overflow-hidden rounded-xl object-contain object-center sm:w-full lg:order-last"
-          />
+          ></Image>
+          
           <div className="flex flex-col justify-center space-y-4">
             <ul className="grid gap-6">
               <li>

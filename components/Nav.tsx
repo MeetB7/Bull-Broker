@@ -40,7 +40,7 @@ const Nav = () => {
           className="text-sm font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
-          Help-Ai
+          Ask-Ai
         </Link>
       </div>
     </nav>
