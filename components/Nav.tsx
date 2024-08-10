@@ -10,7 +10,7 @@ const Nav = () => {
         className="flex items-center justify-center ml-1 mb-2 md:ml-6 "
         prefetch={false}
       >
-        <Image src="/bull.svg" alt="Bull" width={80} height={80} />
+        <Image src="./bull.svg" alt="Bull" width={80} height={80} />
         <span className="sr-only">Bull Broker</span>
       </Link>
       <div className=" ml-auto flex gap-3 mr-3 sm:gap-6 sm:mr-0">

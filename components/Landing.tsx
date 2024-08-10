@@ -44,7 +44,7 @@ export async function Landing() {
             </div>
           </div>
           <Image
-            src="/vercel.svg"
+            src="./vercel.svg"
             width="550"
             height="550"
             alt="Hero"

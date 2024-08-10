@@ -21,7 +21,7 @@ const Features = () => {
         </div>
         <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
           <Image
-            src="/1.jpg"
+            src="./1.jpg"
             width="590"
             height="350"
             alt="Image"
