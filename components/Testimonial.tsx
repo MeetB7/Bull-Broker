@@ -47,7 +47,7 @@ const Testimonial = () => {
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h4 className="text-lg font-semibold">Jane Smith</h4>
+                  <h4 className="text-lg font-semibold">Meet B</h4>
                   <p className="text-sm text-muted-foreground">
                     Investor, Bull Broker
                   </p>

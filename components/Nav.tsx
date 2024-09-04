@@ -1,10 +1,20 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Chatbot from "./Chatbot";
 
 const Nav = () => {
   return (
-    <nav className="fixed w-full px-0 lg:px-6 h-14 flex items-center border rounded-b-lg z-50 bg-white">
+    <nav className="fixed w-full px-0 lg:px-6 h-14 flex items-center border backdrop-blur-lg rounded-b-lg z-50 bg-white/70">
       <Link
         href="#landing"
         className="flex items-center justify-center ml-1 mb-2 md:ml-6 "
@@ -35,14 +45,23 @@ const Nav = () => {
         >
           About
         </Link>
-        <Link
-          href="/help"
-          className="text-sm font-medium hover:underline underline-offset-4"
-          prefetch={false}
-        >
-          Ask-Ai
-        </Link>
       </div>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="sm:ml-3 py-0 text-sm font-medium hover:underline underline-offset-4">
+            Ask-Ai
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Ask Me Anything ~ AI</DialogTitle>
+            <DialogDescription>
+              A ChatBot to help with basic queries.
+            </DialogDescription>
+          </DialogHeader>
+          <Chatbot />
+        </DialogContent>
+      </Dialog>
     </nav>
   );
 };

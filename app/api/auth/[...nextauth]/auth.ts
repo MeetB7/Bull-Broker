@@ -1,11 +1,12 @@
 import NextAuth from "next-auth";
 import Github from "next-auth/providers/github";
+import credentials from "next-auth/providers/credentials";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Github({
-        clientId:process.env.GITHUB_CLIENT_ID,
-        clientSecret:process.env.GITHUB_SECRECT,
+      clientId:process.env.GITHUB_CLIENT_ID,
+      clientSecret:process.env.GITHUB_SECRECT,
       profile(profile) {
         console.log("Profile_Github: ", profile);
         
@@ -17,6 +18,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         };
       },
     }),
+    credentials({
+      name: "Credentials",
+    
+      credentials: {
+        
+      }
+
+    })
   ],
-  callbacks: {}
+  callbacks: {
+    async redirect() {
+      return "/dashboard"
+    }
+  },
+  pages: {
+    signIn: "/login",
+    signOut: ""
+  }
 });
