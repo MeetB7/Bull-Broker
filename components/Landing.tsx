@@ -39,13 +39,13 @@ export async function Landing() {
               </Link>
               ):(
                 <Link
-                href="/login"
+                href="/signup"
                 className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium hover-bg-accent
                 text-primary-foreground shadow transition-colors focus-visible:outline-none hover:bg-muted hover:text-green-600
                 focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
-                Sign In
+                Sign Up
               </Link>
               )} 
               

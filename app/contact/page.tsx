@@ -1,11 +1,18 @@
+"use client";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const page = () => {
+  const router = useRouter();
   return (
-    <div>
-      <Link href="/" className="flex items-center ml-6">
+    <div className="h-screen overflow-hidden flex-col">
+      <Button variant="ghost" onClick={() => router.push("/")} className=" fixed top-0 left-0 m-2">
+      <span>&lt;-</span>
+      </Button>
+      <Link href="/" className="ml-6 mb-0 items-center">
         <Image src="/bull.svg" width={70} height={70} alt="home"/>
         <span className="sr-only">Home</span>
       </Link>

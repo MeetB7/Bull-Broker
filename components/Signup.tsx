@@ -11,29 +11,62 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signin, signinwithGithub, signinwithGoogle } from "@/actions/user";
+import { register, signinwithGithub, signinwithGoogle } from "@/actions/user";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
-export function LoginForm() {
-  const router = useRouter()
+export function SignupForm() {
+
+  const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formdata = new FormData(event.currentTarget);
+
+    try {
+      const result = await register(formdata);
+      if (result.success) {
+        alert(result.message);
+        router.push("/login");
+      } else {
+        alert(result.message);
+      }
+    } catch (err: any) {
+      alert(err.message || "An error occurred");
+    }
+  };
+
+  const router = useRouter();
+
   return (
     <>
-      <Button variant="ghost" onClick={() => router.push("/")} className=" fixed top-0 left-0 m-2">
-      <span>&lt;-</span>
+      <Button
+        variant="ghost"
+        onClick={() => router.push("/")}
+        className=" fixed top-0 left-0 m-2"
+      >
+        <span>&lt;-</span>
       </Button>
       <Card className="mx-auto max-w-sm ">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email below to create your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            <form action={signin}>
+            <form onSubmit={handleRegister}>
               <div className="grid gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    id="name"
+                    type="name"
+                    name="name"
+                    placeholder="Meet Brijwani"
+                    required
+                  />
+                </div>
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -63,7 +96,7 @@ export function LoginForm() {
                   />
                 </div>
                 <Button type="submit" className="w-full mt-2">
-                  Login
+                  Sign Up
                 </Button>
               </div>
             </form>
@@ -87,15 +120,15 @@ export function LoginForm() {
                   className="w-full flex items-center justify-center space-x-2 p-2"
                 >
                   <FaGithub size={25} />
-                  <span>Login with Github</span>
+                  <span>Continue with Github</span>
                 </Button>
               </form>
             </div>
           </div>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="/signup" className="underline">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/login" className="underline">
+              Log In
             </Link>
           </div>
         </CardContent>
