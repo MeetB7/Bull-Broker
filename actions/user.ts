@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import {hash} from "bcryptjs";
 import { CredentialsSignin } from "next-auth";
 
+
 const register = async (formData : FormData) => {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
@@ -20,17 +21,17 @@ const register = async (formData : FormData) => {
 
     const exists = await User.findOne({ email });
     if (exists) {
-        return { success: false, message: "User already exists" };
+        return { success: false, message: "User already exists." };
     }
     
     const hashPass = await hash(password,12)
 
     await User.create({name,email,password: hashPass});
+
     console.log("User Added");
 
-    return { success: true, message: "User registered successfully" };
+    return { success: true, message: "User registered successfully!" };
 
-    // redirect('/login')
 }
 
 const signin = async (formData : FormData) => {
@@ -40,18 +41,21 @@ const signin = async (formData : FormData) => {
 
     try {
         
-        await signIn('credentials', {
+        const userData = await signIn('credentials', {
             callbackUrl: "/",
             email, password,
             redirect: false
         })
 
+        if (userData.success == true){
+            return { success: true, message: "Logged In!" };
+        }
+        else return {success: false, message: userData.cause}
+        
     } catch (error) {
         const err = error as CredentialsSignin
-        return err.cause;
+        return err;
     }
-
-    redirect("/dashboard")
 
 }
 

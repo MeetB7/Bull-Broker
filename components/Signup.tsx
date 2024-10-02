@@ -15,6 +15,8 @@ import { register, signinwithGithub, signinwithGoogle } from "@/actions/user";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { Bounce, toast, ToastContainer} from "react-toastify"
+import  'react-toastify/ReactToastify.css'
 
 export function SignupForm() {
 
@@ -25,13 +27,15 @@ export function SignupForm() {
     try {
       const result = await register(formdata);
       if (result.success) {
-        alert(result.message);
-        router.push("/login");
+        toast.success(result.message);
+        setTimeout(() => {
+          router.push("/login");
+        }, 2200);  
       } else {
-        alert(result.message);
+        toast.error(result.message)
       }
     } catch (err: any) {
-      alert(err.message || "An error occurred");
+      toast.error(err.message || "An error occurred");
     }
   };
 
@@ -112,7 +116,7 @@ export function SignupForm() {
                 </Button>
               </form>
             </div>
-            <div className="grid gap-2">
+            {/* <div className="grid gap-2">
               <form action={signinwithGithub}>
                 <Button
                   type="submit"
@@ -123,7 +127,7 @@ export function SignupForm() {
                   <span>Continue with Github</span>
                 </Button>
               </form>
-            </div>
+            </div> */}
           </div>
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
@@ -133,6 +137,19 @@ export function SignupForm() {
           </div>
         </CardContent>
       </Card>
+      <ToastContainer
+      position="bottom-right"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover={false}
+      theme="light"
+      transition= {Bounce}
+      />
     </>
   );
 }

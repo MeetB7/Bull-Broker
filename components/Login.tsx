@@ -15,9 +15,29 @@ import { signin, signinwithGithub, signinwithGoogle } from "@/actions/user";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { ToastContainer,toast } from "react-toastify";
 
 export function LoginForm() {
   const router = useRouter()
+
+  const handlesignin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const formdata = new FormData(event.currentTarget);
+    try {
+      const result = await signin(formdata);
+      if (result) {
+        toast.success(result.message);
+        setTimeout(() => {
+          router.push("/login");
+        }, 2200);  
+      } else {
+        toast.error(result)
+      }
+    } catch (err: any) {
+      toast.error(err.message || "An error occurred");
+    }
+  }
+
   return (
     <>
       <Button variant="ghost" onClick={() => router.push("/")} className=" fixed top-0 left-0 m-2">
@@ -32,7 +52,7 @@ export function LoginForm() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            <form action={signin}>
+            <form onSubmit={handlesignin}>
               <div className="grid gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
@@ -79,7 +99,7 @@ export function LoginForm() {
                 </Button>
               </form>
             </div>
-            <div className="grid gap-2">
+            {/* <div className="grid gap-2">
               <form action={signinwithGithub}>
                 <Button
                   type="submit"
@@ -90,7 +110,7 @@ export function LoginForm() {
                   <span>Login with Github</span>
                 </Button>
               </form>
-            </div>
+            </div> */}
           </div>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
