@@ -1,16 +1,30 @@
+"use client";
 import { fetchIntraday, getQuote, getSearch, getFundamentals } from '@/lib/utils'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 const page = async ({params}:any) => {
+    const [profit, setprofit] = useState<boolean>()
     const intrady_data = await fetchIntraday(params.ticker)
-    console.log(intrady_data)
+    // console.log(intrady_data)
+    let timeseries = intrady_data['Time Series (5min)']
+    let keys = Object.keys(timeseries);
+    let latestClose = parseFloat(timeseries[keys[0]]['4. close']);
+    let previousClose = parseFloat(timeseries[keys[1]]['4. close']);
     // const data = await getQuote(params.ticker)
     // console.log(data)
-    const sugg = await getSearch("Relian")
+    // const sugg = await getSearch("Relian")
     // console.log(sugg)
     const fundamentals = await getFundamentals(params.ticker)
-    console.log(fundamentals)
+    // console.log(fundamentals)
+
+
+    let priceChange = latestClose - previousClose;
+    let percentageChange = (priceChange / previousClose) * 100;
+    if ( priceChange < 0 ){
+       setprofit(true)
+    }
+    else setprofit(false)
     return (
     <div className='p-5'>
       <div className='mt-2'>
@@ -26,9 +40,12 @@ const page = async ({params}:any) => {
         <div className='mt-5'>
       <h3 className="font-semibold text-xl">Stock Quote for: {params.ticker.toUpperCase()}</h3>
       <div className="mt-4">
-        <p>Current Price: ${parseFloat(intrady_data['05. price']).toFixed(2)}</p>
-        <p>Price Change: {intrady_data['09. change']} USD</p>
-        <p>Volume: {parseInt(intrady_data['06. volume'], 10).toLocaleString()} shares</p>
+        <p>Time Frame: 5min </p>
+        <p>Current Price: ${latestClose}</p>
+        <p>Price Change: <span className={`${profit? ' text-green-600' : 'text-red-600'}`}> {priceChange.toFixed(3)} </span> USD</p>
+        <p>Percentage Change: <span className={`${profit? ' text-green-600' : 'text-red-600'}`}> {percentageChange.toFixed(2)} </span> %</p>
+
+        <p>Volume: {timeseries[keys[0]]['5. volume']} shares</p>
       </div>
     </div>
       </div>

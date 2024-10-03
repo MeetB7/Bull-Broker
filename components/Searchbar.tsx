@@ -1,8 +1,6 @@
  "use client"
 
 import React, { useState } from 'react';
-import axios from 'axios';
-import { fetchIntraday } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { IoSearch } from "react-icons/io5";
 
