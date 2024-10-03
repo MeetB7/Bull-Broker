@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import React from "react";
 import Testimonial from "@/components/Testimonial";
 import Features from "@/components/Features";
+import Searchbar from "@/components/Searchbar";
 
 const page = () => {
   return (

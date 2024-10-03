@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import Searchbar from "./Searchbar";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +24,7 @@ const Nav = () => {
         <Image src="/bull.svg" alt="Bull" width={80} height={80} />
         <span className="sr-only">Bull Broker</span>
       </Link>
+      <Searchbar/>
       <div className=" ml-auto flex gap-3 mr-3 sm:gap-6 sm:mr-0">
         <Link
           href="#features"
